@@ -112,15 +112,19 @@ Thank you for using the banking system!
 **Run Locally**
 
 1. Clone the repository
+
 git clone https://github.com/kanand1994/IIT-M_MCSE_Pro.git
 
 2. Navigate to the project directory
-cd eD-Banking
+
+cd IIT-M_MCSE_Pro\D_banking
 
 3. Install Dependencies
+
 There are no external dependencies for this console-based banking system, as it uses standard Python libraries for file handling and data storage.
 
 4. Run the Program
+
 python main.py
 
 This will start the banking system, and you will be prompted the menus and enter your choice.
