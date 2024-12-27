@@ -112,7 +112,7 @@ Thank you for using the banking system!
 **Run Locally**
 
 1. Clone the repository
-git clone https://github.com/nz-m/eD-Banking.git
+git clone https://github.com/kanand1994/IIT-M_MCSE_Pro.git
 
 2. Navigate to the project directory
 cd eD-Banking
