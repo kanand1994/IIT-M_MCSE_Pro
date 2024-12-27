@@ -9,17 +9,19 @@ from create_account import create_account
 from load_accounts import load_accounts
 from transaction import deposit,withdraw,check_balance
 from login import login
-
+from admin_login import admin_login
+from admin import admin_menu
 
 
 # Main function to run the banking system
 def main():
     accounts = load_accounts()
     while True:
-        print("Welcome to the Banking System!")
+        print("Welcome to the E_D Banking System!")
         print("1. Create Account")
         print("2. Login")
-        print("3. Exit")
+        print("3. Banking Login")
+        print("4. Exit")
         choice = input("Enter your choice: ")
 
         if choice == '1':
@@ -47,6 +49,9 @@ def main():
                     else:
                         print("Invalid choice, please try again.")
         elif choice == '3':
+            if admin_login():
+                admin_menu()
+        elif choice == '4':
             print("Thank you for using the banking system!")
             break
         else:
