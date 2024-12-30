@@ -7,7 +7,8 @@ Created on Thu Dec 26 21:17:25 2024
 import os
 from load_accounts import load_accounts
 from save_accounts import save_accounts
-
+from admin_transaction import log_admin_transaction,ADMIN_TRANSACTIONS_FILE
+from admin_login import ADMIN_USERNAME
 TRANSACTIONS_FILE = "transactions.txt"
 # Admin panel functions
 def view_all_accounts():
@@ -28,6 +29,16 @@ def view_transactions():
         for line in file:
             print(line.strip())
 
+def view_admin_transactions():
+    if not os.path.exists(ADMIN_TRANSACTIONS_FILE):
+        print("No admin transactions found.")
+        return
+    print("\nAdmin Transaction History:")
+    with open(ADMIN_TRANSACTIONS_FILE, "r") as file:
+        for line in file:
+            print(line.strip())
+
+# Function to delete an account
 def delete_account():
     account_number = input("Enter the account number to delete: ")
     accounts = load_accounts()
@@ -36,9 +47,16 @@ def delete_account():
         print("Account not found.")
         return
 
+    reason = input("Enter reason for deleting the account: ")
+    
+    # Log the account deletion in the admin transaction file
+    log_admin_transaction(ADMIN_USERNAME, "Delete Account", account_number, reason)
+    
+    # Remove the account from the account data
     del accounts[account_number]
     save_accounts(accounts)
-    print(f"Account {account_number} has been deleted.")
+    print(f"Account {account_number} has been deleted and the reason has been recorded.")
+
 
 # Admin menu
 def admin_menu():
@@ -46,8 +64,9 @@ def admin_menu():
         print("\nAdmin Panel:")
         print("1. View All Accounts")
         print("2. View Transactions")
-        print("3. Delete Account")
-        print("4. Logout")
+        print("3. View Admin Transactions (Account Deletions)")
+        print("4. Delete Account")
+        print("5. Logout")
 
         choice = input("Enter your choice: ")
 
@@ -56,8 +75,10 @@ def admin_menu():
         elif choice == "2":
             view_transactions()
         elif choice == "3":
-            delete_account()
+            view_admin_transactions()
         elif choice == "4":
+            delete_account()
+        elif choice == "5":
             print("Logging out...")
             break
         else:
